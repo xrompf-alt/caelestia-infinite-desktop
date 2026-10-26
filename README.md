@@ -1,6 +1,7 @@
 # hyprland-infinite-desktop-v2
 A powerful script to transform your Hyprland workspace into an "infinite" canvas. This tool allows you to pan all floating windows simultaneously using your mouse and navigate between them with keyboard shortcuts, creating a dynamic and boundless desktop experience.
 
+![setup](20261026135447.png)
 
 
 ## 🚀 Features
