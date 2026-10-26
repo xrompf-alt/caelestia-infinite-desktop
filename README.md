@@ -153,4 +153,7 @@ return {
 
  **Move windows:** Press/hold ***SHIFT + SUPER + Arrow Keys*** to move windows on floating.
 
- **Move tiled windows:** Press ***SUPER + ALT + Arrow Keys*** yo move tiled windows.
+ **Move tiled windows:** Press ***SUPER + ALT + Arrow Keys*** yo move tiled windows
+ 
+# Credits
+[hyprland-infinitie-desktop-v2](https://github.com/sarodscommits/hyprland-infinitie-desktop-v2)
