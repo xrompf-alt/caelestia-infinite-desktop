@@ -28,21 +28,6 @@ A powerful script to transform your Hyprland workspace into an "infinite" canvas
 
 # Automatic:
 
-1. **Download the file named "Install hyprland infinite desktop" into the "~/" directory (Home/USER/).**
-   
-2. **Run the following commands:**
-   ```bash
-   chmod +x install-hyprland-infinite-desktop.sh
-   ```
-
-   ```bash
-   ./install-hyprland-infinite-desktop.sh
-   ```
-
-3. **Read the changes in hyprland.lua carefully (they are printed at the end of the script).**
-
-4. **Reboot your system**
-
 
 # Manual:
 
@@ -107,37 +92,53 @@ Add the following lines to your ~/.config/hypr/hyprland.lua:
    ***(if you already have a bind that uses one of the required keys or for workspaces, replace them)***
    ```bash
 
+local mainMod = "SUPER"
 
-   local mainMod = "SUPER"
+-- Workspaces
+hl.bind(mainMod .. " + Z", hl.dsp.focus({ workspace = "-1" }))
+hl.bind(mainMod .. " + X", hl.dsp.focus({ workspace = "+1" }))
+hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.window.move({ workspace = "-1" }))
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "+1" }))
 
-   -- Workspaces
-   hl.bind(mainMod .. " + Z", hl.dsp.focus({ workspace = "-1" }))
-   hl.bind(mainMod .. " + X", hl.dsp.focus({ workspace = "+1" }))
-   hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.window.move({ workspace = "-1" }))
-   hl.bind(mainMod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "+1" }))
+-- Infinite desktop 
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("python3 ~/scripts/floating_tile_toggle.py"))
 
-   -- Infinite desktop 
-   hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("python3 ~/scripts/floating_tile_toggle.py"))
+-- Window Navigation
+hl.bind(mainMod .. " + left",  hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py left"))
+hl.bind(mainMod .. " + right", hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py right"))
+hl.bind(mainMod .. " + up",    hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py up"))
+hl.bind(mainMod .. " + down",  hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py down"))
 
-   hl.bind(mainMod .. " + left",  hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py left"))
-   hl.bind(mainMod .. " + right", hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py right"))
-   hl.bind(mainMod .. " + up",    hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py up"))
-   hl.bind(mainMod .. " + down",  hl.dsp.exec_cmd("python3 ~/scripts/navigate_windows.py down"))
+-- 1. CLEAR THE INTERFERENCE FIRST
+hl.unbind(mainMod .. " + ALT + left")
+hl.unbind(mainMod .. " + ALT + right")
+hl.unbind(mainMod .. " + ALT + up")
+hl.unbind(mainMod .. " + ALT + down")
 
-   hl.bind(mainMod .. " + ALT + left",  hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py left"))
-   hl.bind(mainMod .. " + ALT + right", hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py right"))
-   hl.bind(mainMod .. " + ALT + up",    hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py up"))
-   hl.bind(mainMod .. " + ALT + down",  hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py down"))
 
-   hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.exec_cmd("python3 ~/scripts/move_window.py left"),  { repeating = true })
-   hl.bind(mainMod .. " + SHIFT + right", hl.dsp.exec_cmd("python3 ~/scripts/move_window.py right"), { repeating = true })
-   hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.exec_cmd("python3 ~/scripts/move_window.py up"),    { repeating = true })
-   hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.exec_cmd("python3 ~/scripts/move_window.py down"),  { repeating = true })
+-- Move Tiled Windows
+hl.bind(mainMod .. " + ALT + left",  hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py left"))
+hl.bind(mainMod .. " + ALT + right", hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py right"))
+hl.bind(mainMod .. " + ALT + up",    hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py up"))
+hl.bind(mainMod .. " + ALT + down",  hl.dsp.exec_cmd("python3 ~/scripts/move_window_tiled.py down"))
 
-   hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py left"),  {    repeating = true })
-   hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py right"), { repeating = true })
-   hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py up"),    { repeating = true })
-   hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py down"),  { repeating = true })
+-- Move Windows (Repeating)
+hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.exec_cmd("python3 ~/scripts/move_window.py left"),  { repeating = true })
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.exec_cmd("python3 ~/scripts/move_window.py right"), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.exec_cmd("python3 ~/scripts/move_window.py up"),    { repeating = true })
+hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.exec_cmd("python3 ~/scripts/move_window.py down"),  { repeating = true })
+
+-- Resize Windows (Repeating)
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py left"),  { repeating = true })
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py right"), { repeating = true })
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py up"),    { repeating = true })
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("python3 ~/scripts/resize_window.py down"),  { repeating = true })
+
+-- Variable Overrides (Keep this at the very bottom of the file)
+return {
+    browser = "helium-browser", 
+}
+
    ```
 
 ## 🖱️ How to use
@@ -149,8 +150,8 @@ Add the following lines to your ~/.config/hypr/hyprland.lua:
  **Navigation:** Press ***SUPER + Arrow Keys*** to center and focus the next floating/tiled window.
  
  **Toggle floating/layout:** Press ***SUPER + D*** to toggle all windows floating/mosaic.
+**Toggle floating/layout:** Press ***SUPER + G*** to toggle all windows floating/mosaic.
 
- **Toggle floating/layout:** Press ***SUPER + V*** ti toggle one window flotating/mosaic.
 
  **Rezize window:** Press/hold ***CTRL + SUPER + Arrow Keys*** to rezize windows.
 
