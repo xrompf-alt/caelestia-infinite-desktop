@@ -24,12 +24,7 @@ A powerful script to transform your Hyprland workspace into an "infinite" canvas
 -Better navigation.
 
 
-## 📥 Installation
-
-# Automatic:
-
-
-# Manual:
+# Manual Installation (until i learn sh):
 
 1. **Requirements**
    You need Python 3, jq, bash, python-evdev installed on your system.
@@ -83,15 +78,15 @@ A powerful script to transform your Hyprland workspace into an "infinite" canvas
 
 2. **Keybindings** Add the following lines to your ~/.config/caelestia/hypr-vars.lua:
    Add these binds to enable keyboard navigation between your floating windows:
-   ```bash
- hl.on("hyprland.start", function()
-     hl.exec_cmd("python3 ~/scripts/infinite_desktop_core.py 1.6 > /tmp/infinite-desktop.log 2>&1")
-end)
 
-    ```
+```lua
+hl.on("hyprland.start", function()
+    hl.exec_cmd("python3 ~/scripts/infinite_desktop_core.py 1.6 > /tmp/infinite-desktop.log 2>&1")
+end)
+```
     
    ***(if you already have a bind that uses one of the required keys or for workspaces, replace them)***
-   ```bash
+   ```lua
 
 local mainMod = "SUPER"
 
